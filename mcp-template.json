@@ -1,0 +1,65 @@
+{
+  "mcpServers": {
+    "mcp-atlassian": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "CONFLUENCE_URL",
+        "-e",
+        "CONFLUENCE_USERNAME",
+        "-e",
+        "CONFLUENCE_API_TOKEN",
+        "-e",
+        "JIRA_URL",
+        "-e",
+        "JIRA_USERNAME",
+        "-e",
+        "JIRA_API_TOKEN",
+        "ghcr.io/sooperset/mcp-atlassian:latest"
+      ],
+      "env": {
+        "CONFLUENCE_URL": "https://<your-domain>.atlassian.net/wiki",
+        "CONFLUENCE_USERNAME": "<your-email>",
+        "CONFLUENCE_API_TOKEN": "<your-confluence-token>",
+        "JIRA_URL": "https://<your-domain>.atlassian.net",
+        "JIRA_USERNAME": "<your-email>",
+        "JIRA_API_TOKEN": "<your-jira-token>"
+      }
+    },
+    "context7": {
+      "command": "docker",
+      "timeout": 60000,
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "MCP_TRANSPORT",
+        "-e",
+        "PORT",
+        "mcp/context7"
+      ],
+      "env": {
+        "MCP_TRANSPORT": "stdio",
+        "PORT": "8089"
+      }
+    },
+    "github": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "GITHUB_PERSONAL_ACCESS_TOKEN",
+        "ghcr.io/github/github-mcp-server"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "<your-github-token>"
+      }
+    }
+  }
+}
