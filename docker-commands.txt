@@ -1,0 +1,28 @@
+# Docker Commands for MCP Servers
+# Replace placeholder values with your actual credentials
+
+# Atlassian MCP Server (Jira/Confluence)
+docker run -i --rm \
+  -e CONFLUENCE_URL="https://<your-domain>.atlassian.net/wiki" \
+  -e CONFLUENCE_USERNAME="<your-email>" \
+  -e CONFLUENCE_API_TOKEN="<your-confluence-token>" \
+  -e JIRA_URL="https://<your-domain>.atlassian.net" \
+  -e JIRA_USERNAME="<your-email>" \
+  -e JIRA_API_TOKEN="<your-jira-token>" \
+  ghcr.io/sooperset/mcp-atlassian:latest
+
+# Context7 MCP Server
+docker run -i --rm \
+  -e MCP_TRANSPORT="stdio" \
+  -e PORT="8089" \
+  mcp/context7
+
+# GitHub MCP Server
+docker run -i --rm \
+  -e GITHUB_PERSONAL_ACCESS_TOKEN="<your-github-token>" \
+  ghcr.io/github/github-mcp-server
+
+# One-liner versions:
+# docker run -i --rm -e CONFLUENCE_URL="https://<your-domain>.atlassian.net/wiki" -e CONFLUENCE_USERNAME="<your-email>" -e CONFLUENCE_API_TOKEN="<your-confluence-token>" -e JIRA_URL="https://<your-domain>.atlassian.net" -e JIRA_USERNAME="<your-email>" -e JIRA_API_TOKEN="<your-jira-token>" ghcr.io/sooperset/mcp-atlassian:latest
+# docker run -i --rm -e MCP_TRANSPORT="stdio" -e PORT="8089" mcp/context7
+# docker run -i --rm -e GITHUB_PERSONAL_ACCESS_TOKEN="<your-github-token>" ghcr.io/github/github-mcp-server
