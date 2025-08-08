@@ -40,6 +40,20 @@ You can manually create or edit an `mcp.json` file in your workspace root for pr
 - **Workspace scope:** Place `mcp.json` in your project root.
 - **Global scope:** Place `mcp.json` in your VS Code user settings directory (see [VS Code docs](https://code.visualstudio.com/docs/getstarted/keybindings#_keyboard-shortcuts-editor) for location).
 
+#### How to Open and Configure `mcp.json`
+
+- **For Workspace Configuration:**
+  1. Open the Command Palette (`Ctrl+Shift+P`).
+  2. Type and select `MCP: Open Workspace Folder MCP Configuration`.
+  3. This will open (or create) the `mcp.json` file in your current workspace root. Edit this file to add your providers as shown in the examples below.
+
+- **For Global/User Configuration:**
+  1. Open the Command Palette (`Ctrl+Shift+P`).
+  2. Type and select `MCP: Open User Configuration`.
+  3. This will open (or create) the global `mcp.json` file in your VS Code user settings directory. Edit this file to add your providers.
+
+After editing and saving the `mcp.json` file, reload VS Code or use the MCP extension's reload command to apply changes.
+
 ---
 
 ## 3. Example `mcp.json` Configurations
@@ -63,13 +77,13 @@ You can manually create or edit an `mcp.json` file in your workspace root for pr
 
 ```json
 {
-	"servers": {
-		"github": {
-			"type": "http",
-			"url": "https://api.githubcopilot.com/mcp/",
-			"gallery": true
-		},
-	"inputs": []
+  "servers": {
+    "github": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/",
+      "gallery": true
+    },
+  "inputs": []
 }
 ```
 
@@ -122,10 +136,45 @@ in case the above example not work.
 
 ## 4. Tips
 
-- You can combine multiple server in a single `mcp.json`.
+
+- You can combine multiple servers in a single `mcp.json`.
 - After editing `mcp.json`, reload VS Code or use the MCP extension's reload command.
 - For sensitive data, prefer using environment variables or VS Code secrets storage if supported.
-- Use `>MCP : List Server` command to list avaliable server and start or stop any server.
+- Use `>MCP : List Server` command to list available servers and start or stop any server.
+
+---
+
+## 5. Using Tools in GitHub Copilot
+
+When using Copilot with MCP, you can select which tools (context providers or servers) are available for Copilot to use. This is managed through your `mcp.json` configuration or via the MCP extension UI.
+
+- To select or enable tools, ensure the relevant providers are listed in your `mcp.json` file.
+- You can manage and trust servers using the MCP: Browse Servers command.
+- In some Copilot experiences, you may be prompted to select which tools to enable for a session or workspace.
+
+- To manually select tools in the Copilot Chat panel, you can click on the screwdriver (tools) icon usually located near the chat input box. This opens the tool selection menu, where you can enable or disable available tools for your current session.
+
+### Tool Limitations
+- There is a limit to the number of tools (context providers/servers) that can be active at once. Typically, Copilot supports up to 120 tools per workspace/session, but this may vary by version and configuration.
+- If you exceed the limit, you may need to disable or remove some providers from your `mcp.json` or untrust servers in the MCP extension.
+
+---
+
+## 6. Required Permissions for MCP with GitHub Copilot
+
+To use MCP with GitHub Copilot, you may need to grant the following permissions depending on the providers you configure:
+
+- **File System Access:** To read and write the `mcp.json` configuration file.
+- **Network Access:** To connect to remote MCP servers (HTTP, NPM, Pip, Docker, etc.).
+- **Authentication Tokens:**
+  - For Atlassian: API token and cloud ID.
+  - For GitHub: Personal access token with appropriate repo and read permissions.
+  - For Context7: API key and workspace ID.
+- **Extension Permissions:** The MCP and Copilot extensions may request additional permissions in VS Code to manage context and connect to servers.
+
+Always keep your tokens and credentials secure. Use VS Code's secret storage or environment variables where possible.
+
+---
 
 ---
 
